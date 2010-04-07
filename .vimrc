@@ -124,10 +124,13 @@ autocmd FileType c,cpp,lua autocmd BufWritePre <buffer> :call setline(1,map(getl
 let g:Align_xstrlen=2
 
 au BufRead * :exe "set expandtab"
+au BufRead *.html :exe "set ft=htmldjango"
+au BufRead *.html :exe "set indentexpr=off"
+au BufRead *.html :exe "set autoindent"
 au BufNewFile,BufRead *.nyx setf lua
-autocmd BufRead *_test.lua :exe "Snip should should '${1:...}'\n    '${2:true}'\n\n${3}" 
-autocmd BufRead *_test.lua :exe "Snip shouldd should '${1:...}'\n    '${2:true} == \\\n        \"${3}\"'\n\n${4}" 
-autocmd BufRead *_test.lua :exe "Snip deve deve'${1:...}'\n    '${2:true}'\n\n${3}" 
-autocmd BufRead *_test.lua :exe "Snip devee deve'${1:...}'\n    '${2:true} == \\\n        \"${3}\"'\n\n${4}" 
-autocmd BufRead *_test.lua :exe "Snip with with   '${1:...}'\nshould '${2:...}'\n    '${3:true}'\n\n${4}" 
-autocmd BufRead *_test.lua :exe "Snip com com '${1:...}'\ndeve'${2:...}'\n    '${3:true}'\n\n${4}" 
+autocmd BufRead *_test.lua :exe "Snip should should '${1:...}'\n    '${2:true}'\n\n${3}"
+autocmd BufRead *_test.lua :exe "Snip shouldd should '${1:...}'\n    '${2:true} == \\\n        \"${3}\"'\n\n${4}"
+autocmd BufRead *_test.lua :exe "Snip deve deve'${1:...}'\n    '${2:true}'\n\n${3}"
+autocmd BufRead *_test.lua :exe "Snip devee deve'${1:...}'\n    '${2:true} == \\\n        \"${3}\"'\n\n${4}"
+autocmd BufRead *_test.lua :exe "Snip with with   '${1:...}'\nshould '${2:...}'\n    '${3:true}'\n\n${4}"
+autocmd BufRead *_test.lua :exe "Snip com com '${1:...}'\ndeve'${2:...}'\n    '${3:true}'\n\n${4}"
