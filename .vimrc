@@ -60,12 +60,6 @@ endif
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
@@ -107,7 +101,6 @@ set wildignore=*~,*.o,*.obj
 set scrolloff=5                 " keep at least 5 lines above/below cursor
 set sidescrolloff=5             " keep at least 5 columns left/right of cursor
 set history=2000                " remember the last 2000 commands
-set nocompatible                " vim defaults, not vi!
 
 nmap q: :q
 nmap gy gT
@@ -119,7 +112,7 @@ nmap <C-Enter> <esc>O
 set gfn=Monaco:h14
 set number
 set textwidth=72
-autocmd FileType c,cpp,lua autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+"autocmd FileType c,cpp,lua autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 let g:Align_xstrlen=2
 
@@ -128,9 +121,3 @@ au BufRead *.html :exe "set ft=htmldjango"
 au BufRead *.html :exe "set indentexpr=off"
 au BufRead *.html :exe "set autoindent"
 au BufNewFile,BufRead *.nyx setf lua
-autocmd BufRead *_test.lua :exe "Snip should should '${1:...}'\n    '${2:true}'\n\n${3}"
-autocmd BufRead *_test.lua :exe "Snip shouldd should '${1:...}'\n    '${2:true} == \\\n        \"${3}\"'\n\n${4}"
-autocmd BufRead *_test.lua :exe "Snip deve deve'${1:...}'\n    '${2:true}'\n\n${3}"
-autocmd BufRead *_test.lua :exe "Snip devee deve'${1:...}'\n    '${2:true} == \\\n        \"${3}\"'\n\n${4}"
-autocmd BufRead *_test.lua :exe "Snip with with   '${1:...}'\nshould '${2:...}'\n    '${3:true}'\n\n${4}"
-autocmd BufRead *_test.lua :exe "Snip com com '${1:...}'\ndeve'${2:...}'\n    '${3:true}'\n\n${4}"
