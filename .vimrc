@@ -120,4 +120,5 @@ au BufRead * :exe "set expandtab"
 au BufRead *.html :exe "set ft=htmldjango"
 au BufRead *.html :exe "set indentexpr=off"
 au BufRead *.html :exe "set autoindent"
+au BufRead *.lua :exe "LuaInspect"
 au BufNewFile,BufRead *.nyx setf lua
