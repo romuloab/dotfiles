@@ -28,19 +28,29 @@ set scrolloff=2                 " keep at least 2 lines above/below cursor
 set sidescrolloff=2             " keep at least 2 columns left/right of cursor
 set history=2000                " remember the last 2000 commands
 
+" statusline
+set laststatus=2                " always show statusline
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+
+set list                        " show tabs and trailling spaces
+set listchars=tab:→‧,trail:‧
+
 set t_Co=256
 
 set path+=$EVN_ENV/src/**,$EVN_ENV/templates/**,$EVN_ENV/www/**
-set gfn=Monaco:h14
-"set gfn=Consolas:h14
+
+" Set the font VIM's GUIs will use. 
+" TODO detect which client/os (win,linux,mac)
+"set gfn=Monaco:h14
+set gfn=Consolas:h14
 
 " ~~ Plugins setup ~~
-  
+
 " Pathogen Plugin
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 
 " LuaInspect plugin
-let g:lua_inspect_events = ''  " Temporarily disable lua-inspect 
+let g:lua_inspect_events = ''  " Temporarily disable lua-inspect
 
 " Align plugin
 let g:Align_xstrlen=2
@@ -70,7 +80,7 @@ endif " has("autocmd")
 command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
 nmap gy gT              " asdas
-imap <C-Enter> <esc>O 
+imap <C-Enter> <esc>O
 nmap <C-Enter> <esc>O
 
 autocmd FileType c,css,javascript,cpp,lua,html,htmldjango autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
