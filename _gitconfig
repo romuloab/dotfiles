@@ -7,3 +7,5 @@
     wdiff = diff --color-words
     wshow = show --color-words
     log-all = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[push]
+	default = upstream

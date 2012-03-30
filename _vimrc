@@ -79,16 +79,25 @@ endif " has("autocmd")
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
-nmap gy gT              " asdas
+nmap gy gT
+nnoremap j gj
+nnoremap k gk
+nnoremap <Up> gk
+nnoremap <Down> gj
 imap <C-Enter> <esc>O
 nmap <C-Enter> <esc>O
 
+set pastetoggle=<F2>
+
 autocmd FileType c,css,javascript,cpp,lua,html,htmldjango autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
+au! Syntax less source $HOME/.vim/ftplugin/less.vim
 au BufRead *.html :exe "set ft=htmldjango"
 au BufRead *.html :exe "set indentexpr=off"
+au BufRead *.less :exe "set ft=less"
 
 " Because of pathogen module, syntax highlighting should be called last
 colorscheme wombat256
 filetype plugin indent on
+filetype indent on
 syntax enable
