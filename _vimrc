@@ -32,8 +32,8 @@ set history=2000                " remember the last 2000 commands
 set laststatus=2                " always show statusline
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 
-set list                        " show tabs and trailling spaces
-set listchars=tab:→‧,trail:‧
+"set list                        " show tabs and trailling spaces
+"set listchars=tab:→‧,trail:‧
 
 set t_Co=256
 
