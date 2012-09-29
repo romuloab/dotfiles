@@ -75,6 +75,13 @@ if has("autocmd")
 
 endif " has("autocmd")
 
+" CtrlP
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
+    \ 'AcceptSelection("t")': ['<cr>'],
+    \ }
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
@@ -101,3 +108,7 @@ colorscheme wombat256
 filetype plugin indent on
 filetype indent on
 syntax enable
+
+" Adiciona atalho pra editar arquivos no diretório do arquivo atual. 
+" Digite ":e %%/" para expandir para ":e /path/do/arquivo/aberto/"
+cabbr <expr> %% expand('%:p:h')
