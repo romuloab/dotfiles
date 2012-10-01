@@ -64,9 +64,6 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -111,7 +108,7 @@ nmap <C-Enter> <esc>O
 "set gfn=Consolas:h14
 set gfn=Monaco:h14
 set number
-set textwidth=72
+set textwidth=0
 "autocmd FileType c,cpp,lua autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 let g:Align_xstrlen=2
@@ -120,5 +117,5 @@ au BufRead * :exe "set expandtab"
 au BufRead *.html :exe "set ft=htmldjango"
 au BufRead *.html :exe "set indentexpr=off"
 au BufRead *.html :exe "set autoindent"
-au BufRead *.lua :exe "LuaInspect"
+"au BufRead *.lua :exe "LuaInspect"
 au BufNewFile,BufRead *.nyx setf lua
