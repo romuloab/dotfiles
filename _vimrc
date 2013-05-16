@@ -1,6 +1,9 @@
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
+if match($TERM, "screen")!=-1
+    "set term=xterm
+endif
 
 set nocompatible
 set backup                      " keep a backup file
@@ -20,6 +23,8 @@ set shiftwidth=4
 set textwidth=0                 " disable text wrap
 set autoindent                  " always set autoindenting on
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+
+set tabpagemax=100              " increase 'vim -p' page count limit to 100
 
 let maplocalleader=','          " all my macros start with ,
 set wildmenu                    " : menu has tab completion, etc
@@ -94,7 +99,15 @@ nnoremap <Down> gj
 imap <C-Enter> <esc>O
 nmap <C-Enter> <esc>O
 
-set pastetoggle=<F2>
+nmap <A-,> :tabprevious<CR>
+nmap <A-.> :tabnext<CR>
+
+map [D :tabprevious<CR>
+map [C :tabnext<CR>
+map , :tabprevious<CR>
+map . :tabnext<CR>
+
+set pastetoggle=[12~
 
 autocmd FileType c,css,javascript,cpp,lua,html,htmldjango autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
@@ -104,7 +117,8 @@ au BufRead *.html :exe "set indentexpr=off"
 au BufRead *.less :exe "set ft=less"
 
 " Because of pathogen module, syntax highlighting should be called last
-colorscheme wombat256
+" colorscheme wombat256
+colorscheme mustang
 filetype plugin indent on
 filetype indent on
 syntax enable
