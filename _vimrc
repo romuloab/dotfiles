@@ -86,6 +86,13 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
     \ 'AcceptSelection("t")': ['<cr>'],
     \ }
+ let g:ctrlp_custom_ignore = {
+   \ 'dir':  '\v([\/]\.(git|hg|svn)$)',
+   \ 'file': '\v\.(exe|so|dll|.*~)$',
+   \ }
+
+let g:ctrlp_max_files = 0
+let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
