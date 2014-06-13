@@ -1,9 +1,5 @@
-if $SHELL =~ 'bin/fish'
-    set shell=/bin/sh
-endif
-if match($TERM, "screen")!=-1
-    "set term=xterm
-endif
+set shell=/bin/bash
+set t_Co=256
 
 set nocompatible
 set backup                      " keep a backup file
@@ -40,7 +36,6 @@ set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 "set list                        " show tabs and trailling spaces
 "set listchars=tab:→‧,trail:‧
 
-set t_Co=256
 
 set path+=$EVN_ENV/src/**,$EVN_ENV/templates/**,$EVN_ENV/www/**
 
@@ -103,29 +98,31 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <Up> gk
 nnoremap <Down> gj
+vnoremap <C-X> <Esc>`.``gvP``P       " Replaces the last yanked text with the visual selection
+noremap <space> :nohlsearch<CR> " Toggles highlight search
 imap <C-Enter> <esc>O
 nmap <C-Enter> <esc>O
 
+" Linux
 nmap <A-,> :tabprevious<CR>
 nmap <A-.> :tabnext<CR>
 
-map [D :tabprevious<CR>
-map [C :tabnext<CR>
-map , :tabprevious<CR>
-map . :tabnext<CR>
-
-set pastetoggle=[12~
-
-autocmd FileType c,css,javascript,cpp,lua,html,htmldjango autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+set pastetoggle=<F12>
+"autocmd FileType c,css,javascript,cpp,lua,html,htmldjango autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 au! Syntax less source $HOME/.vim/ftplugin/less.vim
 au BufRead *.html :exe "set ft=htmldjango"
 au BufRead *.html :exe "set indentexpr=off"
 au BufRead *.less :exe "set ft=less"
+au BufRead *.php  :exe "set tags=/web/php.tags"
+
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt-=preview " Don't show scratch buffer
 
 " Because of pathogen module, syntax highlighting should be called last
 " colorscheme wombat256
-colorscheme mustang
+set background=dark
+colorscheme Tomorrow-Night
 filetype plugin indent on
 filetype indent on
 syntax enable
