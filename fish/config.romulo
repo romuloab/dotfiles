@@ -1,0 +1,102 @@
+set -x PATH /home/expensify/.gem/ruby/1.9.1/bin/ $PATH
+
+# It seems that setting DVTM_TERM doesn't help the 256 color glitches
+# set -x DVTM_TERM xterm
+
+function gs --description 'git status'
+    git status $argv
+end
+
+function gh --description 'git diff HEAD'
+    git diff HEAD $argv
+end
+
+function gb --description 'git fetch origin && checkout origin/master'
+    git fetch origin
+    git checkout -b $argv[ 1 ] origin/master
+end
+
+function gp --description 'git push current branch to origin'
+    git push origin $GIT_BRANCH
+end
+
+function gc --description 'git checkout'
+    git checkout $argv
+end
+
+function lsd --description 'list the directories in the current dir'
+    find . -maxdepth 1 -type d $argv
+end
+
+function v --description 'alias for vim -p'
+    command vim -p $argv
+end
+
+function vi --description 'alias for vim -p'
+    command vim -p $argv
+end
+
+function vim --description 'alias for vim -p'
+    command vim -p $argv
+end
+
+function fish_right_prompt --description 'Add current time to the right prompt'
+    date "+%Y-%m-%m %H:%M:%S"
+end
+
+function fish_greeting
+    # Does nothing. I don't need a greeting.
+end
+
+function lc
+    echo -n $history[1]
+end
+
+# name: RobbyRussel
+function _git_branch_name
+  echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+end
+
+#echo (command git status -s --ignore-submodules=dirty ^/dev/null)
+function _is_git_clean
+    git diff-index --quiet HEAD
+end
+
+function fish_prompt
+    set -l last_status $status
+    set -l cyan (set_color -o cyan)
+    set -l yellow (set_color -o yellow)
+    set -l red (set_color -o red)
+    set -l blue (set_color -o blue)
+    set -l green (set_color -o green)
+    set -l normal (set_color normal)
+    set -xg GIT_BRANCH (_git_branch_name)
+    set -l uid (id -u)
+
+    if test "$uid" = "0"
+        set is_root "$red★ "
+    else
+        set is_root ''
+    end
+
+    if test $last_status = 0
+        set arrow "$green➜ "
+    else
+        set arrow "$red➜ "
+    end
+
+    set -l cwd $cyan(basename (prompt_pwd))
+
+    if [ $GIT_BRANCH ]
+        set git_info "$green$GIT_BRANCH"
+        if _is_git_clean
+            set git_dirty "$green✓"
+        else
+            set git_dirty "$yellow✗"
+        end
+    end
+
+    #echo -n "$red★ " $arrow $cwd $git_info $git_dirty $normal
+    echo -n $is_root $arrow $cwd $git_info $git_dirty $normal
+end
+

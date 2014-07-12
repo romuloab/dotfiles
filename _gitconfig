@@ -1,13 +1,13 @@
-[user]
-    name = Romulo
-    email = romuloab@gmail.com
 [color]
     diff = auto
 [alias]
     wdiff = diff --color-words
     wshow = show --color-words
     log-all = log --graph --decorate --pretty=oneline --abbrev-commit --all
-[push]
-	default = upstream
 [merge]
-	tool = vimdiff
+    tool = vimdiff
+[user]
+    name = Romulo Bahiense
+    email = romulo@expensify.com
+[core]
+    excludesfile = /home/expensify/.gitignore_global

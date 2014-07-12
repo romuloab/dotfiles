@@ -93,13 +93,19 @@ let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
 " file it was loaded from, thus the changes you made.
 command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
+nnoremap <c-t> <esc>:tabnew<space>
 nmap gy gT
 nnoremap j gj
 nnoremap k gk
 nnoremap <Up> gk
 nnoremap <Down> gj
-vnoremap <C-X> <Esc>`.``gvP``P       " Replaces the last yanked text with the visual selection
-noremap <space> :nohlsearch<CR> " Toggles highlight search
+nnoremap ; :
+vnoremap ; :
+nnoremap : ;
+" Replaces the last yanked text with the visual selection
+vnoremap <C-X> <Esc>`.``gvP``P
+" Toggles highlight search
+noremap <space> :nohlsearch<CR> 
 imap <C-Enter> <esc>O
 nmap <C-Enter> <esc>O
 
