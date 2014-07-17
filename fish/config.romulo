@@ -1,7 +1,5 @@
 set -x PATH /home/expensify/.gem/ruby/1.9.1/bin/ $PATH
-
-# It seems that setting DVTM_TERM doesn't help the 256 color glitches
-# set -x DVTM_TERM xterm
+set -x DVTM_TERM xterm
 
 function gs --description 'git status'
     git status $argv
