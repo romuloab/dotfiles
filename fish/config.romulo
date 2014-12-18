@@ -1,5 +1,5 @@
 set -x PATH /home/expensify/.gem/ruby/1.9.1/bin/ $PATH
-set -x DVTM_TERM xterm
+# set -x DVTM_TERM xterm
 
 function gs --description 'git status'
     git status $argv
@@ -78,9 +78,9 @@ function fish_prompt
     end
 
     if test $last_status = 0
-        set arrow "$green➜ "
+        set arrow "$green➜"
     else
-        set arrow "$red➜ "
+        set arrow "$red➜"
     end
 
     set -l cwd $cyan(basename (prompt_pwd))
@@ -95,6 +95,6 @@ function fish_prompt
     end
 
     #echo -n "$red★ " $arrow $cwd $git_info $git_dirty $normal
-    echo -n $is_root $arrow $cwd $git_info $git_dirty $normal
+    echo -n "$is_root$arrow " $cwd $git_info $git_dirty $normal
 end
 

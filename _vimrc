@@ -19,6 +19,7 @@ set shiftwidth=4
 set textwidth=0                 " disable text wrap
 set autoindent                  " always set autoindenting on
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+set formatoptions=bcrqlnj
 
 set tabpagemax=100              " increase 'vim -p' page count limit to 100
 
@@ -39,7 +40,7 @@ set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 
 set path+=$EVN_ENV/src/**,$EVN_ENV/templates/**,$EVN_ENV/www/**
 
-" Set the font VIM's GUIs will use. 
+" Set the font VIM's GUIs will use.
 " TODO detect which client/os (win,linux,mac)
 "set gfn=Monaco:h14
 set gfn=Consolas:h14
@@ -102,10 +103,14 @@ nnoremap <Down> gj
 nnoremap ; :
 vnoremap ; :
 nnoremap : ;
+nnoremap gf :tabnew <cfile>
+"nmap <c-}> <c-w><c-]><c-w>TgT
 " Replaces the last yanked text with the visual selection
 vnoremap <C-X> <Esc>`.``gvP``P
 " Toggles highlight search
-noremap <space> :nohlsearch<CR> 
+nnoremap <space> :nohlsearch<CR>
+" Visual select last pasted text (a la gv): http://vim.wikia.com/wiki/Selecting_your_pasted_text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 imap <C-Enter> <esc>O
 nmap <C-Enter> <esc>O
 
@@ -117,9 +122,10 @@ set pastetoggle=<F12>
 "autocmd FileType c,css,javascript,cpp,lua,html,htmldjango autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 au! Syntax less source $HOME/.vim/ftplugin/less.vim
-au BufRead *.html :exe "set ft=htmldjango"
-au BufRead *.html :exe "set indentexpr=off"
+"au BufRead *.html :exe "set ft=htmldjango"
+"au BufRead *.html :exe "set indentexpr=off"
 au BufRead *.less :exe "set ft=less"
+au BufRead *.?js :exe "set ft=javascript"
 au BufRead *.php  :exe "set tags=/web/php.tags"
 
 let g:SuperTabDefaultCompletionType = "context"
@@ -127,12 +133,15 @@ set completeopt-=preview " Don't show scratch buffer
 
 " Because of pathogen module, syntax highlighting should be called last
 " colorscheme wombat256
+" colorscheme Tomorrow-Night
+colorscheme mustang
 set background=dark
-colorscheme Tomorrow-Night
 filetype plugin indent on
 filetype indent on
 syntax enable
+let g:vdebug_options = { "port": 9988 }
 
-" Adiciona atalho pra editar arquivos no diretório do arquivo atual. 
+" Adiciona atalho pra editar arquivos no diretório do arquivo atual.
 " Digite ":e %%/" para expandir para ":e /path/do/arquivo/aberto/"
 cabbr <expr> %% expand('%:p:h')
+

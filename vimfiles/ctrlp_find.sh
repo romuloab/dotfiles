@@ -10,6 +10,7 @@ elif [ "$1" = "/web" ] || [ "$1" = "$EXPDIR" ]; then
         -path $EXPDIR/externalLib -or \
         -path $EXPDIR/buildtools -or \
         -path $EXPDIR/.git -or \
+        -path $EXPDIR/vendor -or \
         -path $EXPDIR/node_modules \
         \) -prune -o -name '*' -type f | grep -v '~$' | grep -v 'swp$'
 else
