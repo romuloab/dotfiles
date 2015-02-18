@@ -10,4 +10,4 @@
     name = Romulo Bahiense
     email = romulo@expensify.com
 [core]
-    excludesfile = /home/expensify/.gitignore_global
+    excludesfile = ~/.gitignore_global

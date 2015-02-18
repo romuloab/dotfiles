@@ -10,8 +10,13 @@ function gh --description 'git diff HEAD'
 end
 
 function gb --description 'git fetch origin && checkout origin/master'
-    git fetch origin
-    git checkout -b $argv[ 1 ] origin/master
+    set branch $argv[ 1 ]
+    if git branch | grep $branch >/dev/null
+        git checkout $branch
+    else
+        git fetch origin
+        git checkout -b $branch origin/master
+    end
 end
 
 function gp --description 'git push current branch to origin'
