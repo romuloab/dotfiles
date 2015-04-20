@@ -7,9 +7,9 @@ if [ ! -f $HOME/.ssh/known_hosts ]; then
     exit 1
 fi
 
-GIT_VERSION="2.2.0"
+GIT_VERSION="2.3.1"
 FISH_VERSION="2.1.1"
-DVTM_VERSION="0.13"
+DVTM_VERSION="0.14"
 ACK_VERSION="2.14"
 GIT="git-$GIT_VERSION"
 FISH="fish-$FISH_VERSION"
@@ -20,7 +20,7 @@ DVTM_TAR="$DVTM.tar.gz"
 
 ACK="ack-$ACK_VERSION-single-file"
 
-sudo apt-get -y install autoconf build-essential libncurses5-dev zlib1g-dev gettext htop man wget
+sudo apt-get -y install autoconf build-essential libncurses5-dev zlib1g-dev gettext htop man wget libcurl4-openssl-dev
 
 sudo mkdir -p /code/src
 sudo chown -R $USER:$GROUP /code
@@ -52,3 +52,4 @@ cd /code/$DVTM
 #cp /code/dotfiles/dvtm/config.mk /code/$DVTM/config.mk
 ln -s /code/dotfiles/dvtm/config.h /code/$DVTM/config.h
 make && sudo make install
+sudo cp /usr/local/share/terminfo/d/dvtm* /usr/share/terminfo/d/

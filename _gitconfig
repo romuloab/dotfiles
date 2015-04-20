@@ -11,3 +11,5 @@
     email = romulo@expensify.com
 [core]
     excludesfile = ~/.gitignore_global
+[push]
+	default = nothing

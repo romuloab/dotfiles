@@ -1,5 +1,12 @@
-set -x PATH /home/expensify/.gem/ruby/1.9.1/bin/ $PATH
-# set -x DVTM_TERM xterm
+set -U EDITOR vim
+set -x GOPATH /source/go
+set -x PATH $PATH $GOPATH/bin
+set -x DVTM_TERM dvtm
+
+if test -f ~/.config.fish
+    . ~/.config.fish
+end
+
 
 function gs --description 'git status'
     git status $argv

@@ -26,6 +26,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/closetag.vim'
 Plugin 'vim-scripts/PHP-correct-Indenting'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'fatih/vim-go'
+Plugin 'tpope/vim-commentary'
 
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -43,6 +45,7 @@ set hidden                  " do not unload buffers that get hidden
 set noswapfile              " do not use a swap file for buffers
 set nowritebackup           " do not make backup before overwriting file
 set mouse=a                 " enable mouse when available
+set nostartofline           " don't move the cursor to the start of the line with G,gg etc
 
 set laststatus=2            " always show the status line
 set nowrap                  " do not wrap text
@@ -87,7 +90,13 @@ vnoremap p "_dP
 " Git/fugitive shortcuts
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gf <C-W>h<C-W>czR
+nnoremap <Leader>TP :tabmove -1<CR>
+nnoremap <Leader>TN :tabmove +1<CR>
+
+" It seems CtrlP is messing with fugitive. This should fix.
+au BufReadPost fugitive://* set bufhidden=delete
 
 " <nul> is <c-space>, but actually works
 map <nul> <Plug>(easymotion-s2)
@@ -123,6 +132,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_max_files = 0
 let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
+let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
+                              \'AcceptSelection("t")': ['<cr>']}
 
 " Expands %% to current file's directory
 " Type ":e %%/" to expand to ":e /path/of/this/file/"
@@ -146,3 +157,18 @@ vnoremap <C-X> <Esc>`.``gvP``P
 " Visual select last pasted text (a la gv):
 " http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+nmap <leader>s :%s/ \+$//g
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost * exe "normal! g`\""
+    " \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    " \   exe "normal! g`\"" |
+    " \ endif
