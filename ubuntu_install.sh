@@ -46,6 +46,8 @@ if [ ! -f /code/dotfiles/.git/config ]; then
 fi
 cd /code/dotfiles
 sh install.sh
+sudo ln -s /code/dotfiles/bin/pbcopy.sh /usr/local/bin/pbcopy
+sudo ln -s /code/dotfiles/bin/pbpaste.sh /usr/local/bin/pbpaste
 cd /code/ncurses-5.9
 ./configure --enable-widec && make && sudo make install
 cd /code/$DVTM

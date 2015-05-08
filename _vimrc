@@ -28,6 +28,9 @@ Plugin 'vim-scripts/PHP-correct-Indenting'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/Align'
+Plugin 'mileszs/ack.vim'
 
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -91,6 +94,11 @@ vnoremap p "_dP
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
+vnoremap <Leader>gb :Gblame<CR>
+
+" Ack
+nmap <Leader>aa :Ack <cword><CR>
+
 nnoremap <Leader>gf <C-W>h<C-W>czR
 nnoremap <Leader>TP :tabmove -1<CR>
 nnoremap <Leader>TN :tabmove +1<CR>
@@ -135,6 +143,11 @@ let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
 let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
                               \'AcceptSelection("t")': ['<cr>']}
 
+
+" Synthastic
+" For JSX files, we want to use a special linter that handles XML tags inline
+autocmd! BufWinEnter *.jsx,*.react.js let g:syntastic_javascript_checkers = ['jsxhint']
+
 " Expands %% to current file's directory
 " Type ":e %%/" to expand to ":e /path/of/this/file/"
 cabbr <expr> %% expand('%:p:h')
@@ -158,6 +171,7 @@ vnoremap <C-X> <Esc>`.``gvP``P
 " http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+" Strips all trailling whitespace
 nmap <leader>s :%s/ \+$//g
 
 au FileType go nmap <leader>r <Plug>(go-run)

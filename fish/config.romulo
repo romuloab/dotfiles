@@ -1,6 +1,6 @@
 set -U EDITOR vim
 set -x GOPATH /source/go
-set -x PATH $PATH $GOPATH/bin
+set -x PATH $PATH $GOPATH/bin /usr/local/go/bin
 set -x DVTM_TERM dvtm
 
 if test -f ~/.config.fish

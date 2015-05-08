@@ -6,15 +6,17 @@ if [ "$DIR" = "/job/evn" ]; then
 elif [ "$DIR" = "/job/sabia" ]; then
     find /job/sabia/ \( -path /job/sabia/upload -or -path /job/sabia/.git -or -path /job/sabia/bower_components \) -prune -o -name '*' -type f | grep -v '~$' | grep -v 'swp$'
 elif [ "$DIR" = "/web" ] || [ "$DIR" = "$EXPDIR" ]; then
-    find $EXPDIR \( \
-        -path $EXPDIR/externalLib -or \
-        -path $EXPDIR/buildtools -or \
-        -path $EXPDIR/.git -or \
-        -path $EXPDIR/vendor -or \
-        -path $EXPDIR/node_modules \
-        \) -prune -o -name '*' -type f \
-        | grep -v '~$' \
-        | grep -v 'swp$'
+    find $EXPDIR -type f | grep -vE 'externalLib/|buildtools/|.git/|vendor/|node_modules/|.sass-cache/|swp$|~$'
+    #find $EXPDIR \( \
+    #    -path $EXPDIR/externalLib -or \
+    #    -path $EXPDIR/buildtools -or \
+    #    -path $EXPDIR/.git -or \
+    #    -path $EXPDIR/vendor -or \
+    #    -path */node_modules/* \
+    #    -path */.sass-cache/* \
+    #    \) -prune -o -name '*' -type f \
+    #    | grep -v '~$' \
+    #    | grep -v 'swp$'
 else
     git ls-files
     git ls-files --exclude-standard --others
