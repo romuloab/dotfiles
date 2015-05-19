@@ -97,7 +97,7 @@ nnoremap <Leader>gb :Gblame<CR>
 vnoremap <Leader>gb :Gblame<CR>
 
 " Ack
-nmap <Leader>aa :Ack <cword><CR>
+nmap <Leader>aa :Ack! <cword><CR>
 
 nnoremap <Leader>gf <C-W>h<C-W>czR
 nnoremap <Leader>TP :tabmove -1<CR>
@@ -136,6 +136,7 @@ autocmd! BufWinEnter *.py,*.vim,vimrc match ErrorMsg '\%>79v.\+'
 autocmd! BufWinEnter *.html match ErrorMsg '\%>100v.\+'
 
 " CtrlP
+" nmap ^_ :CtrlP<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_max_files = 0
@@ -172,7 +173,7 @@ vnoremap <C-X> <Esc>`.``gvP``P
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Strips all trailling whitespace
-nmap <leader>s :%s/ \+$//g
+nmap <leader>ss :%s/ \+$//g<cr>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
