@@ -1,0 +1,7 @@
+#!/bin/sh
+TMP=/tmp/_phpfix
+echo '<?php' > $TMP
+tee -a $TMP > /dev/null
+php-cs-fixer fix $TMP > /dev/null 2> /dev/null
+tail -n+2 $TMP
+

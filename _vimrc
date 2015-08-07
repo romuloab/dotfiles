@@ -85,11 +85,6 @@ noremap ; :
 let mapleader = ","
 let g:mapleader = ","
 
-" Prevent overwriting default register when inconvenient
-vnoremap x "_x
-vnoremap c "_c
-vnoremap p "_dP
-
 " Git/fugitive shortcuts
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
@@ -146,8 +141,12 @@ let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'
 
 
 " Synthastic
+let g:syntastic_javascript_checkers = ['eslint']
 " For JSX files, we want to use a special linter that handles XML tags inline
 autocmd! BufWinEnter *.jsx,*.react.js let g:syntastic_javascript_checkers = ['jsxhint']
+
+" When in XML file, let's use a proper identation prog (libxml2-utils)
+autocmd! BufWinEnter *.xml set equalprg=xmllint\ --format\ -
 
 " Expands %% to current file's directory
 " Type ":e %%/" to expand to ":e /path/of/this/file/"

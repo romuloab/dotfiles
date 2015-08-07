@@ -6,7 +6,7 @@ if [ "$DIR" = "/job/evn" ]; then
 elif [ "$DIR" = "/job/sabia" ]; then
     find /job/sabia/ \( -path /job/sabia/upload -or -path /job/sabia/.git -or -path /job/sabia/bower_components \) -prune -o -name '*' -type f | grep -v '~$' | grep -v 'swp$'
 elif [ "$DIR" = "/web" ] || [ "$DIR" = "$EXPDIR" ]; then
-    find $EXPDIR -type f | grep -vE 'externalLib/|buildtools/|.git/|vendor/|node_modules/|.sass-cache/|swp$|~$'
+    find $EXPDIR -type f | grep -vE 'externalLib/|buildtools/|.git/|vendor/|node_modules/|.sass-cache/|swp$|build/|~$'
     #find $EXPDIR \( \
     #    -path $EXPDIR/externalLib -or \
     #    -path $EXPDIR/buildtools -or \

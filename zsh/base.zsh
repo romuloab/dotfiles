@@ -34,6 +34,7 @@ alias vim='vim -p'
 alias vi='vim'
 alias v='vim'
 
+# I usually search for something in Ack, then just press up arrow, ^a, v, and enter
 function vack {
     vim -p `ack -l $*`
 }
