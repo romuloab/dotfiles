@@ -30,13 +30,17 @@ function gb {
     fi
 }
 
-alias vim='vim -p'
-alias vi='vim'
-alias v='vim'
+alias vim='nvim -p'
+alias vi='nvim'
+alias v='nvim'
 
 # I usually search for something in Ack, then just press up arrow, ^a, v, and enter
 function vack {
-    vim -p `ack -l $*`
+    command nvim -p $(ack -l $*)
+}
+
+function vpt {
+    command nvim -p $(pt -l $*)
 }
 
 alias -g NE="2> /dev/null"
