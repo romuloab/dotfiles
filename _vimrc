@@ -15,11 +15,13 @@ call vundle#rc()
 
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 Plugin 'kurkale6ka/vim-pairs'
-Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-easymotion'
 Plugin 'othree/html5.vim'
 Plugin 'rstacruz/sparkup'
 Plugin 'tpope/vim-fugitive'
@@ -31,6 +33,12 @@ Plugin 'tpope/vim-commentary'
 Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/Align'
 Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'spolu/dwm.vim'
+" Don't forget to `pip install neovim` with python2 (python3 doesn't work)
+Plugin 'joonty/vdebug'
 
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -43,7 +51,9 @@ syntax on
 colorscheme jellybeans
 
 set autoread                " auto reload buffer when file modified externally
-set encoding=utf-8          " default character encoding
+if !has('nvim')
+    set encoding=utf-8          " default character encoding
+endif
 set hidden                  " do not unload buffers that get hidden
 set noswapfile              " do not use a swap file for buffers
 set nowritebackup           " do not make backup before overwriting file
@@ -93,13 +103,16 @@ vnoremap <Leader>gb :Gblame<CR>
 
 " Ack
 nmap <Leader>aa :Ack! <cword><CR>
+if executable('pt')
+    let g:ackprg = 'pt'
+endif
 
 nnoremap <Leader>gf <C-W>h<C-W>czR
 nnoremap <Leader>TP :tabmove -1<CR>
 nnoremap <Leader>TN :tabmove +1<CR>
 
 " It seems CtrlP is messing with fugitive. This should fix.
-au BufReadPost fugitive://* set bufhidden=delete
+" au BufReadPost fugitive://* set bufhidden=delete
 
 " <nul> is <c-space>, but actually works
 map <nul> <Plug>(easymotion-s2)
@@ -130,14 +143,35 @@ autocmd! FileType html,htmldjango source ~/.vim/bundle/closetag.vim/plugin/close
 autocmd! BufWinEnter *.py,*.vim,vimrc match ErrorMsg '\%>79v.\+'
 autocmd! BufWinEnter *.html match ErrorMsg '\%>100v.\+'
 
+"nmap <c-p> :FZF
+nmap <c-p> :GitFile<CR>
+nmap <c-g> :BTags<CR>
+nmap <c-f> :Tags<CR>
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+let g:fzf_action = {
+  \ 'return': 'tab split',
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
 " CtrlP
 " nmap ^_ :CtrlP<cr>
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_max_files = 0
-let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
-let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
-                              \'AcceptSelection("t")': ['<cr>']}
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_max_files = 0
+" let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
+" let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
+"                               \'AcceptSelection("t")': ['<cr>']}
 
 
 " Synthastic
@@ -171,6 +205,13 @@ vnoremap <C-X> <Esc>`.``gvP``P
 " http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+" Sends the current visual to the external program `pbcopy` without changing
+" the buffer.
+vmap <leader>c <esc>:'<,'>:w !pbcopy<CR>
+
+nnoremap <leader>v :read !pbpaste<CR>
+vmap <leader>v "_R<esc>:'<,'>-1read !pbpaste<CR>
+
 " Strips all trailling whitespace
 nmap <leader>ss :%s/ \+$//g<cr>
 
@@ -182,7 +223,13 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
-autocmd BufReadPost * exe "normal! g`\""
-    " \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    " \   exe "normal! g`\"" |
-    " \ endif
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+autocmd BufWritePost *.php exec system("/source/ctags/ctags -a --fields=+aimS --languages=php <cfile>")
+
+let g:vdebug_options = {
+            \"server": "localhost",
+            \"timeout": 10,
+            \"ide_key": "",
+            \"port": 9001,
+            \}

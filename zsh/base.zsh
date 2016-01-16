@@ -10,9 +10,13 @@ unalias gb gs gh gp 2>/dev/null
 alias gs='git status --short'
 alias gh='git diff HEAD'
 
+function gbranch {
+    local branch=$(git rev-parse --symbolic-full-name HEAD)
+    echo -n ${branch#refs/heads/}
+}
+
 function gp {
-    local branch=`git rev-parse --symbolic-full-name HEAD`
-    branch=${branch#refs/heads/}
+    local branch=$(gbranch)
     command git push origin $branch:$branch
 }
 
@@ -48,6 +52,8 @@ alias -g NUL="> /dev/null 2>&1"
 alias -g G='| grep'
 
 alias dvtm='TERM=dvtm-256color dvtm'
+
+alias fixphp='npm run grunt:fix -- --php'
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
