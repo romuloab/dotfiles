@@ -16,7 +16,8 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-surround'
 "Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
@@ -125,16 +126,8 @@ map <Leader>a <Plug>(EasyAlign)
 nnoremap <Leader>r :edit ~/.vimrc<CR>
 nnoremap <Leader>R :source ~/.vimrc<CR>:source ~/.vimrc<CR>
 
-" Airline customizations
-if !exists("g:airline_symbols")
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.whitespace = 'Ξ'
+" Don't forget to install Liberation Mono Powerline
+let g:airline_powerline_fonts = 1
 let g:airline_section_y = airline#section#create(['%p', '%%'])
 let g:airline_section_z = airline#section#create_right(['%l %c'])
 
