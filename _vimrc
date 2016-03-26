@@ -39,6 +39,9 @@ Plugin 'Shougo/unite.vim'
 Plugin 'spolu/dwm.vim'
 " Don't forget to `pip install neovim` with python2 (python3 doesn't work)
 Plugin 'joonty/vdebug'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'FooSoft/vim-argwrap'
 
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -139,6 +142,10 @@ let g:airline_section_z = airline#section#create_right(['%l %c'])
 let g:closetag_html_style=1
 autocmd! FileType html,htmldjango source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 
+" Use JSX syntax on .js files too
+let g:jsx_ext_required = 0
+let g:javascript_enable_domhtmlcss = 1
+
 " Highlight characters when lines get too long
 autocmd! BufWinEnter *.py,*.vim,vimrc match ErrorMsg '\%>79v.\+'
 autocmd! BufWinEnter *.html match ErrorMsg '\%>100v.\+'
@@ -156,8 +163,8 @@ function! s:fzf_statusline()
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
+" \ 'return': 'tab split',
 let g:fzf_action = {
-  \ 'return': 'tab split',
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
@@ -215,10 +222,14 @@ vmap <leader>v "_R<esc>:'<,'>-1read !pbpaste<CR>
 " Strips all trailling whitespace
 nmap <leader>ss :%s/ \+$//g<cr>
 
+nnoremap <silent> <leader>aw :ArgWrap<CR>
+
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go set nolist
+au FileType go let g:argwrap_tail_comma = 1
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler

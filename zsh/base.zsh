@@ -2,6 +2,7 @@ export EDITOR=vim
 export GOPATH=/source/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 export DVTM_TERM=dvtm
+export LC_ALL=C
 #export TERM=dvtm-256color
 
 # Let's remove any pre-existing aliases. These
