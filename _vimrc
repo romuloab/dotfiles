@@ -44,6 +44,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'FooSoft/vim-argwrap'
 
+Plugin 'vim-scripts/twilight256.vim'
+
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
     execute 'silent PluginInstall'
@@ -52,7 +54,8 @@ endif
 
 filetype plugin indent on
 syntax on
-colorscheme jellybeans
+"colorscheme jellybeans
+colorscheme twilight256
 
 set autoread                " auto reload buffer when file modified externally
 if !has('nvim')
