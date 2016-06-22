@@ -134,6 +134,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_y = airline#section#create(['%p', '%%'])
 let g:airline_section_z = airline#section#create_right(['%l %c'])
 
+let g:airline_symbols.space = "\ua0"
+
 " Closetag settings
 let g:closetag_html_style=1
 autocmd! FileType html,htmldjango source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
@@ -220,6 +222,8 @@ nmap <leader>ss :%s/ \+$//g<cr>
 
 nnoremap <silent> <leader>aw :ArgWrap<CR>
 
+let g:go_fmt_command = "goimports"
+au FileType go set listchars=tab:\ \ ,trail:‧
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
