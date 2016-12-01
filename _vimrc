@@ -11,6 +11,7 @@ endif
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle
+set rtp+=/usr/local/opt/fzf
 call vundle#rc()
 
 Plugin 'gmarik/vundle'
@@ -203,6 +204,8 @@ nnoremap <Up> gk
 nnoremap <Down> gj
 nnoremap gf :tabnew <cfile><cr>
 
+inoremap <tab><tab> <esc>
+
 " Replaces the last yanked selection with the visual selection
 vnoremap <C-X> <Esc>`.``gvP``P
 
@@ -237,6 +240,8 @@ au FileType go let g:argwrap_tail_comma = 1
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 autocmd BufWritePost *.php exec system("/source/ctags/ctags -a --fields=+aimS --languages=php <cfile>")
+
+autocmd BufRead,BufNewFile */templates/* set filetype=htmldjango
 
 let g:vdebug_options = {
             \"server": "localhost",

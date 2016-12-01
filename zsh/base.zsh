@@ -1,15 +1,24 @@
 export EDITOR=vim
-export GOPATH=/source/go
+export GOPATH=/Users/romulo/Projects/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 export DVTM_TERM=dvtm
 export LC_ALL=C
 #export TERM=dvtm-256color
+export HOMEBREW_GITHUB_API_TOKEN=4284972390ef19e88691426a7677e8ba07652718
+
+# Oh-my-zsh config
+# Put the configuration here because I keep forgetting to backup the original file
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ZSH_THEME="nanotech"
+plugins=(git jira pip python sudo)
 
 # Let's remove any pre-existing aliases. These
 # aliases are quite common in git plugins
 unalias gb gs gh gp 2>/dev/null
 alias gs='git status --short'
 alias gh='git diff HEAD'
+
+alias iavm='/Applications/VMware\ Fusion.app/Contents/Library/vmrun -T fusion start ~/Documents/Virtual\ Machines.localized/ia-vm.vmwarevm/ia-vm.vmx nogui'
 
 function gbranch {
     local branch=$(git rev-parse --symbolic-full-name HEAD)
@@ -58,3 +67,6 @@ alias fixphp='npm run grunt:fix -- --php'
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+setopt auto_cd
+export CDPATH=$HOME/Projects/
