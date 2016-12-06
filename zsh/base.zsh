@@ -9,8 +9,8 @@ export HOMEBREW_GITHUB_API_TOKEN=4284972390ef19e88691426a7677e8ba07652718
 # Oh-my-zsh config
 # Put the configuration here because I keep forgetting to backup the original file
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-ZSH_THEME="nanotech"
 plugins=(git jira pip python sudo)
+export ZSH=/home/rab/.oh-my-zsh
 
 # Let's remove any pre-existing aliases. These
 # aliases are quite common in git plugins
@@ -74,6 +74,8 @@ export CDPATH=$HOME/Projects/
 
 # theme based on nanotech
 
+source $ZSH/oh-my-zsh.sh
+
 PROMPT='%F{green}%2c%F{blue} [%f '
 RPROMPT='$(git_prompt_info) %F{blue}] %F{green}%D{%L:%M} %F{yellow}%D{%p}%f'
 
@@ -85,4 +87,3 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 if [ ! -z "$SSH_TTY" ]; then
     PROMPT="%F{cyan}$USER@$(hostname) %F{green}%2c%F{blue} [%f "
 fi
-
