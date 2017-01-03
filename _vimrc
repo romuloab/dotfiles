@@ -45,6 +45,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'FooSoft/vim-argwrap'
 
+Plugin 'morhetz/gruvbox'
 Plugin 'vim-scripts/twilight256.vim'
 
 " Automatically install bundles on first run
@@ -53,10 +54,19 @@ if !isdirectory(expand("~/.vim/bundle/vim-airline"))
     execute 'silent q'
 endif
 
+
 filetype plugin indent on
 syntax on
-colorscheme jellybeans
-"colorscheme twilight256
+
+if has('termguicolors')
+    set termguicolors
+endif
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="hard"
+let g:gruvbox_invert_tabline=1
+set background=dark
+colorscheme gruvbox
 
 set autoread                " auto reload buffer when file modified externally
 if !has('nvim')
@@ -112,7 +122,7 @@ vnoremap <Leader>gb :Gblame<CR>
 " Ack
 nmap <Leader>aa :Ack! <cword><CR>
 if executable('pt')
-    let g:ackprg = 'pt'
+    let g:ackprg = 'pt --nocolor'
 endif
 
 nnoremap <Leader>gf <C-W>h<C-W>czR
@@ -124,7 +134,7 @@ nnoremap <Leader>TN :tabmove +1<CR>
 
 " <nul> is <c-space>, but actually works
 map <nul> <Plug>(easymotion-s2)
-map <Leader>a <Plug>(EasyAlign)
+map <Leader>A <Plug>(EasyAlign)
 
 " Shortcuts to edit and reload vim config
 nnoremap <Leader>r :edit ~/.vimrc<CR>
@@ -249,3 +259,4 @@ let g:vdebug_options = {
             \"ide_key": "",
             \"port": 9001,
             \}
+

@@ -7,9 +7,9 @@
 [merge]
     tool = vimdiff
 [user]
-    name = Romulo Bahiense
-    email = romulo@expensify.com
+	name = Romulo
+	email = romulo@interana.com
 [core]
     excludesfile = ~/.gitignore_global
 [push]
-	default = nothing
+	default = current

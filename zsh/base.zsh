@@ -69,8 +69,7 @@ alias -g NUL="> /dev/null 2>&1"
 alias -g G='| grep'
 
 alias dvtm='TERM=dvtm-256color dvtm'
-
-alias fixphp='npm run grunt:fix -- --php'
+alias tmux='tmux -u'
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
