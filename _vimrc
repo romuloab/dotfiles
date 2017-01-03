@@ -55,8 +55,8 @@ endif
 
 filetype plugin indent on
 syntax on
-"colorscheme jellybeans
-colorscheme twilight256
+colorscheme jellybeans
+"colorscheme twilight256
 
 set autoread                " auto reload buffer when file modified externally
 if !has('nvim')

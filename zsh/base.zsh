@@ -10,7 +10,7 @@ export HOMEBREW_GITHUB_API_TOKEN=4284972390ef19e88691426a7677e8ba07652718
 # Put the configuration here because I keep forgetting to backup the original file
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 plugins=(git jira pip python sudo)
-export ZSH=/home/rab/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Let's remove any pre-existing aliases. These
 # aliases are quite common in git plugins
@@ -18,7 +18,14 @@ unalias gb gs gh gp 2>/dev/null
 alias gs='git status --short'
 alias gh='git diff HEAD'
 
-alias iavm='/Applications/VMware\ Fusion.app/Contents/Library/vmrun -T fusion start ~/Documents/Virtual\ Machines.localized/ia-vm.vmwarevm/ia-vm.vmx nogui'
+function vm {
+    local vmrun="/Applications/VMware Fusion.app/Contents/Library/vmrun"
+    local args='-T fusion start'
+    local vmname=$1
+    local vmpath="$HOME/Documents/Virtual Machines.localized/${vmname}.vmwarevm/${vmname}.vmx"
+    echo $vmrun $args "$vmpath" nogui
+    $vmrun -T fusion start "$vmpath" "nogui"
+}
 
 function gbranch {
     local branch=$(git rev-parse --symbolic-full-name HEAD)
@@ -54,7 +61,7 @@ function vack {
 }
 
 function vpt {
-    command nvim -p $(pt -l $*)
+    command nvim -p $(pt -l --nocolor $*)
 }
 
 alias -g NE="2> /dev/null"
