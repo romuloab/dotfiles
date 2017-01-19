@@ -43,11 +43,6 @@ Plugin 'spolu/dwm.vim'
 Plugin 'joonty/vdebug'
 Plugin 'pangloss/vim-javascript'
 Plugin 'FooSoft/vim-argwrap'
-
-Plugin 'morhetz/gruvbox'
-Plugin 'vim-scripts/twilight256.vim'
-Plugin 'herrbischoff/cobalt2.vim'
-
 " Auto complete
 Plugin 'Shougo/deoplete.nvim'
 let g:deoplete#enable_at_startup = 1
@@ -69,6 +64,8 @@ endif
 
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'vim-scripts/twilight256.vim'
+Plugin 'herrbischoff/cobalt2.vim'
+
 Plugin 'morhetz/gruvbox'
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark="hard"
