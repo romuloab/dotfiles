@@ -32,6 +32,7 @@ Plugin 'vim-scripts/PHP-correct-Indenting'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
+Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/Align'
 Plugin 'mileszs/ack.vim'
@@ -42,11 +43,11 @@ Plugin 'spolu/dwm.vim'
 " Don't forget to `pip install neovim` with python2 (python3 doesn't work)
 Plugin 'joonty/vdebug'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
 Plugin 'FooSoft/vim-argwrap'
 
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-scripts/twilight256.vim'
+Plugin 'herrbischoff/cobalt2.vim'
 
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -70,7 +71,7 @@ colorscheme gruvbox
 
 set autoread                " auto reload buffer when file modified externally
 if !has('nvim')
-    set encoding=utf-8          " default character encoding
+    set encoding=utf-8      " default character encoding
 endif
 set hidden                  " do not unload buffers that get hidden
 set noswapfile              " do not use a swap file for buffers
@@ -260,3 +261,9 @@ let g:vdebug_options = {
             \"port": 9001,
             \}
 
+if has('nvim')
+    tnoremap <C-J> <C-\><C-N><C-J><C-J>
+    tnoremap <C-K> <C-\><C-N><C-K><C-K>
+    tnoremap c <C-\><C-N><C-N>
+    tnoremap <ESC> <C-\><C-N>
+endif
