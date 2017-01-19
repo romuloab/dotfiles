@@ -1,6 +1,6 @@
 export EDITOR=vim
 export GOPATH=/Users/romulo/Projects/go
-export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:$HOME/.cargo/bin
 export DVTM_TERM=dvtm
 export LC_ALL=C
 #export TERM=dvtm-256color

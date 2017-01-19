@@ -26878,6 +26878,27 @@
 			<key>Text</key>
 			<string>gt</string>
 		</dict>
+		<key>0x31-0x80000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>1</string>
+		</dict>
+		<key>0x32-0x80000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>2</string>
+		</dict>
+		<key>0x33-0x80000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>3</string>
+		</dict>
 		<key>0x3c-0x120000</key>
 		<dict>
 			<key>Action</key>
@@ -27066,9 +27087,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 149 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>521 322 796 473 0 0 1440 877 </string>
+	<string>440 167 796 473 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>93 453 650 424 0 0 1440 877 </string>
+	<string>109 155 1122 679 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>93 453 650 424 0 0 1440 877 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -27921,7 +27942,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-12-31T18:16:58Z</date>
+	<date>2017-01-11T01:37:10Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

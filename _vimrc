@@ -29,7 +29,6 @@ Plugin 'rstacruz/sparkup'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/closetag.vim'
 Plugin 'vim-scripts/PHP-correct-Indenting'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
 Plugin 'mxw/vim-jsx'
@@ -49,6 +48,10 @@ Plugin 'morhetz/gruvbox'
 Plugin 'vim-scripts/twilight256.vim'
 Plugin 'herrbischoff/cobalt2.vim'
 
+" Auto complete
+Plugin 'Shougo/deoplete.nvim'
+let g:deoplete#enable_at_startup = 1
+
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
     execute 'silent PluginInstall'
@@ -59,9 +62,14 @@ endif
 filetype plugin indent on
 syntax on
 
+" Enable true color
 if has('termguicolors')
     set termguicolors
 endif
+
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'vim-scripts/twilight256.vim'
+Plugin 'morhetz/gruvbox'
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
