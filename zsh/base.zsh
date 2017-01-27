@@ -5,6 +5,7 @@ export DVTM_TERM=dvtm
 export LC_ALL=C
 #export TERM=dvtm-256color
 export HOMEBREW_GITHUB_API_TOKEN=4284972390ef19e88691426a7677e8ba07652718
+export PYTHONIOENCODING=utf-8
 
 # Oh-my-zsh config
 # Put the configuration here because I keep forgetting to backup the original file
