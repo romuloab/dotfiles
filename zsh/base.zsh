@@ -51,6 +51,10 @@ function gb {
     fi
 }
 
+function gfix {
+    vim $(git status --short | grep ^UU | cut -c 4-)
+}
+
 alias vim='nvim -p'
 alias vi='nvim'
 alias v='nvim'
@@ -77,11 +81,10 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 setopt auto_cd
 export CDPATH=$HOME/Projects/
 
-
-# theme based on nanotech
-
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 source $ZSH/oh-my-zsh.sh
 
+# theme based on nanotech
 PROMPT='%F{green}%2c%F{blue} [%f '
 RPROMPT='$(git_prompt_info) %F{blue}] %F{green}%D{%L:%M} %F{yellow}%D{%p}%f'
 
