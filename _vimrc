@@ -32,7 +32,8 @@ Plugin 'vim-scripts/PHP-correct-Indenting'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
 Plugin 'mxw/vim-jsx'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'vim-scripts/Align'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -197,9 +198,9 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 
 " Synthastic
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint']
 " For JSX files, we want to use a special linter that handles XML tags inline
-autocmd! BufWinEnter *.jsx,*.react.js let g:syntastic_javascript_checkers = ['jsxhint']
+"autocmd! BufWinEnter *.jsx,*.react.js let g:syntastic_javascript_checkers = ['jsxhint']
 
 " When in XML file, let's use a proper identation prog (libxml2-utils)
 autocmd! BufWinEnter *.xml set equalprg=xmllint\ --format\ -
