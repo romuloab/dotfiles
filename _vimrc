@@ -205,6 +205,9 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 " For JSX files, we want to use a special linter that handles XML tags inline
 "autocmd! BufWinEnter *.jsx,*.react.js let g:syntastic_javascript_checkers = ['jsxhint']
 
+" ALE
+let g:ale_javascript_eslint_options = '--env jest,jasmine'
+
 " When in XML file, let's use a proper identation prog (libxml2-utils)
 autocmd! BufWinEnter *.xml set equalprg=xmllint\ --format\ -
 
@@ -274,7 +277,7 @@ if has('nvim')
     tnoremap <C-J> <C-\><C-N><C-J><C-J>
     tnoremap <C-K> <C-\><C-N><C-K><C-K>
     tnoremap c <C-\><C-N><C-N>
-    tnoremap <ESC> <C-\><C-N>
+    " tnoremap <ESC> <C-\><C-N>
 endif
 
 " vp doesn't replace paste buffer
