@@ -102,7 +102,8 @@ set wildignore=*~,*.o,*.obj,*.luac
 set backspace=2             " make backspace behave normally
 set expandtab               " insert tabs as spaces
 set shiftwidth=4            " number of spaces for auto indent and line shift
-set cindent                 " syntax-aware auto indent
+set nocindent               " syntax-aware auto indent
+set smartindent
 set smarttab                " <BS> deletes a shiftwidth worth of space
 set softtabstop=4           " number of spaces pressing <Tab> counts for
 set tabstop=4               " number of spaces a <Tab> in the file counts for
@@ -207,6 +208,8 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " ALE
 let g:ale_javascript_eslint_options = '--env jest,jasmine'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
 
 " When in XML file, let's use a proper identation prog (libxml2-utils)
 autocmd! BufWinEnter *.xml set equalprg=xmllint\ --format\ -

@@ -53,7 +53,7 @@ function gb {
 }
 
 function gfix {
-    vim $(git status --short | grep ^UU | cut -c 4-)
+    vim -p $(git status --short | grep ^UU | cut -c 4-)
 }
 
 alias vim='nvim -p'
