@@ -33,7 +33,9 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
 Plugin 'mxw/vim-jsx'
 "Plugin 'scrooloose/syntastic'
-Plugin 'w0rp/ale'
+if has('nvim')
+    Plugin 'w0rp/ale'
+end
 Plugin 'vim-scripts/Align'
 Plugin 'mileszs/ack.vim'
 Plugin 'terryma/vim-expand-region'
@@ -42,7 +44,7 @@ Plugin 'kana/vim-textobj-entire'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'Shougo/unite.vim'
-Plugin 'spolu/dwm.vim'
+"Plugin 'spolu/dwm.vim'
 " Don't forget to `pip install neovim` with python2 (python3 doesn't work)
 Plugin 'joonty/vdebug'
 Plugin 'pangloss/vim-javascript'
