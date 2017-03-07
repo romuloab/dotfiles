@@ -36,6 +36,9 @@ Plugin 'mxw/vim-jsx'
 Plugin 'w0rp/ale'
 Plugin 'vim-scripts/Align'
 Plugin 'mileszs/ack.vim'
+Plugin 'terryma/vim-expand-region'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-entire'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'Shougo/unite.vim'
@@ -273,3 +276,14 @@ if has('nvim')
     tnoremap c <C-\><C-N><C-N>
     tnoremap <ESC> <C-\><C-N>
 endif
+
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+    let @" = s:restore_reg
+    return ''
+endfunction
+function! s:Repl()
+    let s:restore_reg = @"
+    return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()

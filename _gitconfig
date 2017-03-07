@@ -8,7 +8,7 @@
     tool = vimdiff
 [user]
 	name = Romulo
-	email = romulo@interana.com
+	email = romuloab@gmail.com
 [core]
     excludesfile = ~/.gitignore_global
 [push]
