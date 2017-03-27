@@ -1,0 +1,12 @@
+#/bin/bash
+
+tmux split-window -t 0 -h
+tmux split-window -t 1 -v
+
+tmux resize-pane -t 0 -x 120
+
+tmux send-keys -t 0 'cd /www && vim' C-m
+tmux send-keys -t 1 'cd /www && yarn run dev-server -- --notest' C-m
+tmux send-keys -t 2 'cd /www && yarn run test -- -u --watch'
+
+tmux select-pane -t 0
