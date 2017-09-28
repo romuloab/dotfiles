@@ -49,16 +49,6 @@ Plugin 'Shougo/unite.vim'
 Plugin 'joonty/vdebug'
 Plugin 'pangloss/vim-javascript'
 Plugin 'FooSoft/vim-argwrap'
-" Auto complete
-Plugin 'Shougo/deoplete.nvim'
-let g:deoplete#enable_at_startup = 1
-
-" Automatically install bundles on first run
-if !isdirectory(expand("~/.vim/bundle/vim-airline"))
-    execute 'silent PluginInstall'
-    execute 'silent q'
-endif
-
 
 filetype plugin indent on
 syntax on
@@ -78,6 +68,20 @@ let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 let g:gruvbox_invert_tabline=1
 set background=dark
+
+" Auto complete
+if has('python3')
+    Plugin 'Shougo/deoplete.nvim'
+    let g:deoplete#enable_at_startup = 1
+end
+
+" Automatically install bundles on first run
+if !isdirectory(expand("~/.vim/bundle/vim-airline"))
+    execute 'silent PluginInstall'
+    execute 'silent q'
+endif
+
+" Must come after the PluginInstall thing, otherwise it won't be available.
 colorscheme gruvbox
 
 set autoread                " auto reload buffer when file modified externally

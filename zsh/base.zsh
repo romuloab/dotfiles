@@ -1,5 +1,5 @@
 export EDITOR=vim
-export GOPATH=/Users/romulo/Projects/go
+export GOPATH=$HOME/Projects/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:$HOME/.cargo/bin
 export DVTM_TERM=dvtm
 export LC_ALL=C
@@ -18,6 +18,10 @@ export ZSH=$HOME/.oh-my-zsh
 unalias gb gs gh gp 2>/dev/null
 alias gs='git status --short'
 alias gh='git diff HEAD'
+
+function lsd {
+    ls $@ -d */
+}
 
 function vm {
     local vmrun="/Applications/VMware Fusion.app/Contents/Library/vmrun"
