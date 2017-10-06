@@ -154,8 +154,8 @@ map <nul> <Plug>(easymotion-s2)
 map <Leader>A <Plug>(EasyAlign)
 
 " Shortcuts to edit and reload vim config
-nnoremap <Leader>r :edit ~/.vimrc<CR>
-nnoremap <Leader>R :source ~/.vimrc<CR>:source ~/.vimrc<CR>
+nnoremap <Leader>r :edit ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
 " Don't forget to install Liberation Mono Powerline
 let g:airline_powerline_fonts = 1
@@ -197,25 +197,13 @@ let g:fzf_action = {
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-" CtrlP
-" nmap ^_ :CtrlP<cr>
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_max_files = 0
-" let g:ctrlp_user_command = '~/.vim/ctrlp_find.sh %s'
-" let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>', '<2-LeftMouse>'],
-"                               \'AcceptSelection("t")': ['<cr>']}
-
-
-" Synthastic
-"let g:syntastic_javascript_checkers = ['eslint']
-" For JSX files, we want to use a special linter that handles XML tags inline
-"autocmd! BufWinEnter *.jsx,*.react.js let g:syntastic_javascript_checkers = ['jsxhint']
-
 " ALE
 let g:ale_javascript_eslint_options = '--env jest,jasmine'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
 
 " When in XML file, let's use a proper identation prog (libxml2-utils)
 autocmd! BufWinEnter *.xml set equalprg=xmllint\ --format\ -
