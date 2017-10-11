@@ -1,3 +1,3 @@
 smart-case = true
 color = true
-ignore = ['node_modules', 'node_cache', 'assets']
+ignore = ['node_modules', 'node_cache', 'assets', '__snapshots__', 'coverage']

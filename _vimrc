@@ -49,6 +49,17 @@ Plugin 'Shougo/unite.vim'
 Plugin 'joonty/vdebug'
 Plugin 'pangloss/vim-javascript'
 Plugin 'FooSoft/vim-argwrap'
+Plugin 'ervandew/supertab'
+" Auto complete
+" Plugin 'Shougo/deoplete.nvim'
+" let g:deoplete#enable_at_startup = 1
+
+" Automatically install bundles on first run
+if !isdirectory(expand("~/.vim/bundle/vim-airline"))
+    execute 'silent PluginInstall'
+    execute 'silent q'
+endif
+
 
 filetype plugin indent on
 syntax on
@@ -224,8 +235,6 @@ nnoremap <Up> gk
 nnoremap <Down> gj
 nnoremap gf :tabnew <cfile><cr>
 
-inoremap <tab><tab> <esc>
-
 " Replaces the last yanked selection with the visual selection
 vnoremap <C-X> <Esc>`.``gvP``P
 
@@ -241,9 +250,11 @@ nnoremap <leader>v :read !pbpaste<CR>
 vmap <leader>v "_R<esc>:'<,'>-1read !pbpaste<CR>
 
 " Strips all trailling whitespace
-nmap <leader>ss :%s/ \+$//g<cr>
+nmap <silent> <leader>ss :%s/ \+$//ge<CR>
 
 nnoremap <silent> <leader>aw :ArgWrap<CR>
+
+nmap TT :tabnew <C-R>=expand("%:r")<CR>
 
 let g:go_fmt_command = "goimports"
 au FileType go set listchars=tab:\ \ ,trail:‧

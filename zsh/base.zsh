@@ -23,6 +23,12 @@ function lsd {
     ls $@ -d */
 }
 
+alias land='(cd ~/interana/backend/www/ && yarn test && arc land)'
+
+function feature {
+    (cd ~/interana/backend/www/ && git fetch origin && arc feature $1 origin/master)
+}
+
 function vm {
     local vmrun="/Applications/VMware Fusion.app/Contents/Library/vmrun"
     local args='-T fusion start'
@@ -60,7 +66,7 @@ function gfix {
     vim -p $(git status --short | grep ^UU | cut -c 4-)
 }
 
-alias vim='nvim -p'
+alias vim='TERM=tmux-256color nvim -p'
 alias vi='nvim'
 alias v='nvim'
 
