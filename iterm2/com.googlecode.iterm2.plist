@@ -16,6 +16,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
@@ -27067,16 +27069,20 @@
 	<string>929 110 445 279 0 0 1440 877 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>269 381 606 456 0 0 1440 877 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>412 560 616 174 0 0 1440 900 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 379 620 392 0 0 1440 877 </string>
+	<string>410 391 620 392 0 0 1440 900 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 149 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>303 168 796 473 0 0 1440 877 </string>
+	<string>712 206 958 451 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>265 64 1170 813 0 0 1440 877 </string>
+	<string>78 450 650 426 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>611 362 650 424 0 0 1440 877 </string>
+	<string>112 211 650 426 0 0 1440 900 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>210 0 1226 1416 0 0 1440 900 </string>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_F4432229-F467-478D-A566-4E1FF6D6C34E</key>
@@ -27935,7 +27941,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-24T06:06:36Z</date>
+	<date>2017-10-11T02:53:35Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -27954,6 +27960,8 @@
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.40000000596046448</real>
+	<key>SwitchPaneModifier</key>
+	<integer>9</integer>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -27994,9 +28002,11 @@
 	<string>/-+\~_.</string>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.beta.9</string>
+	<string>3.1.3.beta.1</string>
 </dict>
 </plist>
