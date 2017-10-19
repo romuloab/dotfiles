@@ -13,6 +13,7 @@ set rtp+=/usr/local/opt/fzf
 call vundle#rc()
 
 Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'

@@ -66,7 +66,8 @@ function gfix {
     vim -p $(git status --short | grep ^UU | cut -c 4-)
 }
 
-alias vim='TERM=tmux-256color nvim -p'
+# alias vim='TERM=tmux-256color nvim -p'
+alias vim='nvim -p'
 alias vi='nvim'
 alias v='nvim'
 
