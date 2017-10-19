@@ -1,5 +1,3 @@
-" Inspired by https://github.com/ryanss/vim
-
 set shell=/bin/bash                    " Fish'ers need this
 let g:vundle_default_git_proto = 'git' " Vundle should use git:// instead of https://
 
@@ -16,43 +14,42 @@ call vundle#rc()
 
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-surround'
-"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'kurkale6ka/vim-pairs'
-"Plugin 'Lokaltog/vim-easymotion'
 Plugin 'othree/html5.vim'
-Plugin 'rstacruz/sparkup'
 Plugin 'tpope/vim-fugitive'
-Plugin 'vim-scripts/closetag.vim'
-Plugin 'vim-scripts/PHP-correct-Indenting'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
 Plugin 'mxw/vim-jsx'
-"Plugin 'scrooloose/syntastic'
-if has('nvim')
-    Plugin 'w0rp/ale'
-end
 Plugin 'vim-scripts/Align'
 Plugin 'mileszs/ack.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'kana/vim-textobj-user'
 Plugin 'kana/vim-textobj-entire'
+Plugin 'glts/vim-textobj-comment'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'Shougo/unite.vim'
-"Plugin 'spolu/dwm.vim'
-" Don't forget to `pip install neovim` with python2 (python3 doesn't work)
-Plugin 'joonty/vdebug'
 Plugin 'pangloss/vim-javascript'
 Plugin 'FooSoft/vim-argwrap'
 Plugin 'ervandew/supertab'
-" Auto complete
-" Plugin 'Shougo/deoplete.nvim'
-" let g:deoplete#enable_at_startup = 1
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'vim-scripts/twilight256.vim'
+Plugin 'herrbischoff/cobalt2.vim'
+Plugin 'morhetz/gruvbox'
+
+" if has('python3')
+"     Plugin 'Shougo/deoplete.nvim'
+"     let g:deoplete#enable_at_startup = 1
+" end
+
+if has('nvim')
+    Plugin 'w0rp/ale'
+end
 
 " Automatically install bundles on first run
 if !isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -60,6 +57,19 @@ if !isdirectory(expand("~/.vim/bundle/vim-airline"))
     execute 'silent q'
 endif
 
+" Automatically install bundles on first run
+if !isdirectory(expand("~/.vim/bundle/vim-airline"))
+    execute 'silent PluginInstall'
+    execute 'silent q'
+endif
+
+" Must come after the PluginInstall thing, otherwise it won't be available.
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="hard"
+let g:gruvbox_invert_tabline=1
+set background=dark
+colorscheme gruvbox
 
 filetype plugin indent on
 syntax on
@@ -69,36 +79,10 @@ if has('termguicolors')
     set termguicolors
 endif
 
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'vim-scripts/twilight256.vim'
-Plugin 'herrbischoff/cobalt2.vim'
-
-Plugin 'morhetz/gruvbox'
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="hard"
-let g:gruvbox_invert_tabline=1
-set background=dark
-
-" Auto complete
-if has('python3')
-    Plugin 'Shougo/deoplete.nvim'
-    let g:deoplete#enable_at_startup = 1
-end
-
-" Automatically install bundles on first run
-if !isdirectory(expand("~/.vim/bundle/vim-airline"))
-    execute 'silent PluginInstall'
-    execute 'silent q'
-endif
-
-" Must come after the PluginInstall thing, otherwise it won't be available.
-colorscheme gruvbox
-
-set autoread                " auto reload buffer when file modified externally
 if !has('nvim')
     set encoding=utf-8      " default character encoding
 endif
+set autoread                " auto reload buffer when file modified externally
 set hidden                  " do not unload buffers that get hidden
 set noswapfile              " do not use a swap file for buffers
 set nowritebackup           " do not make backup before overwriting file
@@ -157,11 +141,6 @@ nnoremap <Leader>gf <C-W>h<C-W>czR
 nnoremap <Leader>TP :tabmove -1<CR>
 nnoremap <Leader>TN :tabmove +1<CR>
 
-" It seems CtrlP is messing with fugitive. This should fix.
-" au BufReadPost fugitive://* set bufhidden=delete
-
-" <nul> is <c-space>, but actually works
-map <nul> <Plug>(easymotion-s2)
 map <Leader>A <Plug>(EasyAlign)
 
 " Shortcuts to edit and reload vim config
@@ -172,12 +151,7 @@ nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = airline#section#create(['%p', '%%'])
 let g:airline_section_z = airline#section#create_right(['%l %c'])
-
 let g:airline_symbols.space = "\ua0"
-
-" Closetag settings
-let g:closetag_html_style=1
-autocmd! FileType html,htmldjango source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 
 " Use JSX syntax on .js files too
 let g:jsx_ext_required = 0
@@ -231,8 +205,8 @@ nmap ciu ciq<c-o><leader>u<esc>
 nmap gy gT
 nnoremap j gj
 nnoremap k gk
-nnoremap <Up> gk
 nnoremap <Down> gj
+nnoremap <Up> gk
 nnoremap gf :tabnew <cfile><cr>
 
 " Replaces the last yanked selection with the visual selection
@@ -270,16 +244,7 @@ au FileType go let g:argwrap_tail_comma = 1
 " (happens when dropping a file on gvim).
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-autocmd BufWritePost *.php exec system("/source/ctags/ctags -a --fields=+aimS --languages=php <cfile>")
-
 autocmd BufRead,BufNewFile */templates/* set filetype=htmldjango
-
-let g:vdebug_options = {
-            \"server": "localhost",
-            \"timeout": 10,
-            \"ide_key": "",
-            \"port": 9001,
-            \}
 
 if has('nvim')
     tnoremap <C-J> <C-\><C-N><C-J><C-J>

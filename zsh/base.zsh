@@ -79,6 +79,13 @@ function vpt {
     command nvim -p $(pt -l --nocolor $*)
 }
 
+function vmsess {
+    test -z $VM && echo "No VM env" && return 1
+    test -z $SESS && echo "No SESS env" && return 1
+    reset
+    ssh -t $VM "(cd ~/interana/backend/www/src; tmux attach-session -t $SESS || tmux new-session -s $SESS \\; split-pane -h \\; split-pane \\; select-pane -t 0 \\; resize-pane -t 0 -x 120)"
+}
+
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
 alias -g G='| grep'
