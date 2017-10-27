@@ -1,11 +1,14 @@
 export EDITOR=vim
 export GOPATH=$HOME/Projects/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin:$HOME/.cargo/bin
+export CDPATH=$HOME/Dropbox/Projects/
 export DVTM_TERM=dvtm
 export LC_ALL=C
 #export TERM=dvtm-256color
 export HOMEBREW_GITHUB_API_TOKEN=4284972390ef19e88691426a7677e8ba07652718
 export PYTHONIOENCODING=utf-8
+
+setopt auto_cd
 
 # Oh-my-zsh config
 # Put the configuration here because I keep forgetting to backup the original file
@@ -96,9 +99,6 @@ alias tmux='tmux -u'
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
-
-setopt auto_cd
-export CDPATH=$HOME/Projects/
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 source $ZSH/oh-my-zsh.sh

@@ -15,8 +15,8 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
@@ -53,13 +53,7 @@ if has('nvim')
 end
 
 " Automatically install bundles on first run
-if !isdirectory(expand("~/.vim/bundle/vim-airline"))
-    execute 'silent PluginInstall'
-    execute 'silent q'
-endif
-
-" Automatically install bundles on first run
-if !isdirectory(expand("~/.vim/bundle/vim-airline"))
+if !isdirectory(expand("~/.vim/bundle/vim-repeat"))
     execute 'silent PluginInstall'
     execute 'silent q'
 endif
@@ -103,12 +97,9 @@ set wildignore=*~,*.o,*.obj,*.luac
 
 set backspace=2             " make backspace behave normally
 set expandtab               " insert tabs as spaces
-set shiftwidth=4            " number of spaces for auto indent and line shift
 set nocindent               " syntax-aware auto indent
 set smartindent
 set smarttab                " <BS> deletes a shiftwidth worth of space
-set softtabstop=4           " number of spaces pressing <Tab> counts for
-set tabstop=4               " number of spaces a <Tab> in the file counts for
 
 set ignorecase              " ignore case when pattern matching
 set smartcase               " only if all characters are lower case
@@ -149,10 +140,10 @@ nnoremap <Leader>r :edit ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
 " Don't forget to install Liberation Mono Powerline
-let g:airline_powerline_fonts = 1
-let g:airline_section_y = airline#section#create(['%p', '%%'])
-let g:airline_section_z = airline#section#create_right(['%l %c'])
-let g:airline_symbols.space = "\ua0"
+" let g:airline_powerline_fonts = 1
+" let g:airline_section_y = airline#section#create(['%p', '%%'])
+" let g:airline_section_z = airline#section#create_right(['%l %c'])
+" let g:airline_symbols.space = "\ua0"
 
 " Use JSX syntax on .js files too
 let g:jsx_ext_required = 0
@@ -190,6 +181,32 @@ let g:ale_lint_on_text_changed = 0
 
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['javascript.jsx'] = ['prettier']
+
+
+let g:ale_linters = {}
+let g:ale_linters['html'] = []
+
+function! SetupEnvironment()
+  let l:path = expand('%:p')
+  if l:path =~ 'Dropbox/Projects'
+    " setlocal expandtab smarttab textwidth=0
+    " setlocal tabstop=2 shiftwidth=2
+    set shiftwidth=2            " number of spaces for auto indent and line shift
+    set softtabstop=2           " number of spaces pressing <Tab> counts for
+    set tabstop=2               " number of spaces a <Tab> in the file counts for
+    let g:ale_fix_on_save = 1
+    let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-bracket-spacing'
+  else
+    " setlocal tabstop=4 shiftwidth=4 noexpandtab
+    set shiftwidth=4            " number of spaces for auto indent and line shift
+    set softtabstop=4           " number of spaces pressing <Tab> counts for
+    set tabstop=4               " number of spaces a <Tab> in the file counts for
+    let g:ale_fix_on_save = 0
+    let g:ale_javascript_prettier_options = ''
+  endif
+endfunction
+autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
 
 " When in XML file, let's use a proper identation prog (libxml2-utils)
 autocmd! BufWinEnter *.xml set equalprg=xmllint\ --format\ -
@@ -204,32 +221,33 @@ nmap <leader>U "=system('echo -n `uuid -v 4`')<cr>P
 nmap ciu ciq<c-o><leader>u<esc>
 
 nmap gy gT
-nnoremap j gj
-nnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-nnoremap gf :tabnew <cfile><cr>
+nmap j gj
+nmap k gk
+nmap <Down> gj
+nmap <Up> gk
+nmap gf :tabnew <cfile><cr>
+nmap \p :/<script.*>/+,/<\/script>/-!prettier<cr>
 
 " Replaces the last yanked selection with the visual selection
-vnoremap <C-X> <Esc>`.``gvP``P
+vmap <C-X> <Esc>`.``gvP``P
 
 " Visual select last pasted text (a la gv):
 " http://vim.wikia.com/wiki/Selecting_your_pasted_text
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+nmap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Sends the current visual to the external program `pbcopy` without changing
 " the buffer.
 vmap <leader>c <esc>:'<,'>:w !pbcopy<CR>
 
-nnoremap <leader>v :read !pbpaste<CR>
+nmap <leader>v :read !pbpaste<CR>
 vmap <leader>v "_R<esc>:'<,'>-1read !pbpaste<CR>
 
 " Strips all trailling whitespace
 nmap <silent> <leader>ss :%s/ \+$//ge<CR>
 
-nnoremap <silent> <leader>aw :ArgWrap<CR>
+nmap <silent> <leader>aw :ArgWrap<CR>
 
-nmap TT :tabnew <C-R>=expand("%:r")<CR>
+nmap TT :tabnew <C-R>=expand("%:r")<CR>.
 
 let g:go_fmt_command = "goimports"
 au FileType go set listchars=tab:\ \ ,trail:‧
