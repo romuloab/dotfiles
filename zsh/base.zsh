@@ -87,8 +87,11 @@ function vmsess {
     test -z $VM && echo "No VM env" && return 1
     test -z $SESS && echo "No SESS env" && return 1
     reset
-    ssh -t $VM "(cd ~/interana/backend/www/src; tmux attach-session -t $SESS || tmux new-session -s $SESS \\; split-pane -h \\; split-pane \\; select-pane -t 0 \\; resize-pane -t 0 -x 120)"
+    TERM=xterm-256color ssh -t $VM "(cd ~/interana/backend/www/src; LC_CTYPE=en_US.UTF-8 tmux attach-session -t $SESS || \
+      tmux new-session -s $SESS \\; split-pane -h \\; split-pane \\; select-pane -t 2 \\; resize-pane -t 0 -x 120)"
 }
+alias tlog="SESS=log vmsess"
+alias tmain="SESS=main vmsess"
 
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
